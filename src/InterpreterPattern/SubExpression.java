@@ -14,7 +14,9 @@ public class SubExpression extends SymbolExpression {
         super(leftExpression, rightExpression);
     }
 
-    // 解释减法
+    /**
+     * 减法解释具体实现类
+     */
     @Override
     public int interpreter(Map<String, Integer> map) {
         return leftExpression.interpreter(map) - rightExpression.interpreter(map);

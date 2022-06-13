@@ -235,4 +235,3 @@ public class CounterTest1 {
     }
 
 }
-
