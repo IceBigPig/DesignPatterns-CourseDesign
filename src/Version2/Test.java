@@ -12,7 +12,7 @@ public class Test {
 //        TerminalExpression a = new TerminalExpression("a");
 //        TerminalExpression b = new TerminalExpression("b");
 //        TerminalExpression c = new TerminalExpression("c");
-        String str = "9*3*3+11";
+        String str = "9+3*3+1";
         Expression build = Context.build(str);
 
         System.out.println(str + "=" + build.interpreter(context));
