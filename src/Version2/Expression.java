@@ -7,5 +7,9 @@ package Version2;
  **/
 
 public interface Expression {
-    int interpreter(Context context);//一定会有解释方法
+
+    /**
+     * 抽象解释方法
+     */
+    int interpreter(Context context);
 }
