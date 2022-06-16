@@ -50,7 +50,7 @@ public class Context {
                 Expression pop_1 = objects.pop();
                 Expression pop_2 = objects.pop();
                 // 生成带有运算符号的节点
-                objects.push(new MultiplyOperation(pop_1, pop_2));
+                objects.push(new DivisionOperation(pop_2, pop_1));
             } else if (Objects.equals(s, "+")) {
                 //遇到运算符号+号时候
                 // 取出栈顶的两个元素
