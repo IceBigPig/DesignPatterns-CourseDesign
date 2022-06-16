@@ -21,8 +21,6 @@ import javax.swing.JPanel;
 
 public class CounterUI {
 
-    String name;
-
     /**
      * 计算结果
      */
@@ -31,13 +29,6 @@ public class CounterUI {
     //设置文本框的大小为30
     TextField textField = new TextField(30);
 
-    public CounterUI() {
-
-    }
-
-    public CounterUI (String name){
-        this.name = name;
-    }
 
     //创建页面
     public void createFrame() {
