@@ -24,13 +24,21 @@ public class CounterUI {
     /**
      * 计算结果
      */
-    private double result = 0 ;
-    private String stringResult = "";
-    //设置文本框的大小为30
+    private static double result = 0;
+
+    /**
+     * 文本框中输入的内容
+     */
+    private static String stringResult = "";
+
+    /**
+     * 设置文本框的大小为30
+     */
     TextField textField = new TextField(30);
 
-
-    //创建页面
+    /**
+     * 创建计算器窗体方法
+     */
     public void createFrame() {
 
         JFrame jFrame = new JFrame("计算器");
@@ -107,7 +115,9 @@ public class CounterUI {
         jFrame.setVisible(true);
     }
 
-    //对于button 的操作
+    /**
+     * 对于button 的操作
+     */
     public JButton ActionButtonInput(String buttonName) {
         JButton button = new JButton(buttonName);
         button.addActionListener(e -> {
@@ -126,7 +136,6 @@ public class CounterUI {
     public JButton ActionButtonEqu(String buttonName) {
         JButton button = new JButton(buttonName);
         button.addActionListener(arg0 -> {
-
             calculate();
             //将结果显示在文本框
             textField.setText(String.valueOf(result));
@@ -138,27 +147,26 @@ public class CounterUI {
     /**
      * 计算输入的字符串
      */
-    public double calculate() {
+    public static void calculate() {
 
         Context context = new Context();
 
+        // 对输入的表达式进行重新编码
         List<String> infixExpressionList = PolandNotation.toInfixExpressionList(stringResult);
+        List<String> suffixExpressionList = PolandNotation.parseSuffixExpreesionList(infixExpressionList);
+        // 构建语法树
+        Expression build = Context.build(suffixExpressionList);
+//        System.out.printf("expression=%f\n", PolandNotation.calculate(suffixExpressionList));
 
-        List<String> suffixExpreesionList = PolandNotation.parseSuffixExpreesionList(infixExpressionList);
-
-        System.out.printf("expression=%f\n", PolandNotation.calculate(suffixExpreesionList));
-
-        Expression build = Context.build(suffixExpreesionList);
-
-        System.out.println(suffixExpreesionList + "=" + build.interpreter(context));
-
-        this.result = build.interpreter(context);
-
-        return build.interpreter(context);
-
+        // 输出到控制台查看运算结果
+        System.out.println(suffixExpressionList + "=" + build.interpreter(context));
+        // 更正UI界面中的结果
+        result = build.interpreter(context);
     }
 
-    //设置清除按钮监听器
+    /**
+     * 设置清除按钮监听器
+     */
     public JButton DelButton(String buttonName) {
         JButton button = new JButton(buttonName);
         button.addActionListener(arg0 -> {
@@ -170,10 +178,12 @@ public class CounterUI {
         return button;
     }
 
+    /**
+     * 程序主入口
+     */
     public static void main(String[] args) {
 
         CounterUI test = new CounterUI();
         test.createFrame();
-
     }
 }
