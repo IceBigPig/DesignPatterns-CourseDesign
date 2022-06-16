@@ -20,7 +20,7 @@ public class PolandNotation {
     /**
      * 方法：将得到的中缀表达式对应的List => 后缀表达式对应的List
      */
-    public static List<String> parseSuffixExpreesionList(List<String> ls) {
+    public static List<String> parseSuffixExpressionList(List<String> ls) {
         // 定义两个栈
         Stack<String> s1 = new Stack<>(); // 符号栈
         // 说明：因为s2 这个栈，在整个转换过程中，没有pop操作，而且后面我们还需要逆序输出

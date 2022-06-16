@@ -19,7 +19,7 @@ public class OperationAdapter implements CounterOperation{
 
         // 对输入的表达式进行重新编码
         List<String> infixExpressionList = PolandNotation.toInfixExpressionList(inputString);
-        List<String> suffixExpressionList = PolandNotation.parseSuffixExpreesionList(infixExpressionList);
+        List<String> suffixExpressionList = PolandNotation.parseSuffixExpressionList(infixExpressionList);
         // 构建语法树
         Expression build = Context.build(suffixExpressionList);
 //        System.out.printf("expression=%f\n", PolandNotation.calculate(suffixExpressionList));

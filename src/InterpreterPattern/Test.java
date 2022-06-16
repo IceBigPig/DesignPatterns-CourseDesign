@@ -20,7 +20,7 @@ public class Test {
         List<String> infixExpressionList = PolandNotation.toInfixExpressionList(expression);
         System.out.println("中缀" +
                 "表达式对应的List=" + infixExpressionList); // ArrayList [1,+,(,(,2,+,3,),*,4,),-,5]
-        List<String> suffixExpreesionList = PolandNotation.parseSuffixExpreesionList(infixExpressionList);
+        List<String> suffixExpreesionList = PolandNotation.parseSuffixExpressionList(infixExpressionList);
         System.out.println("后缀表达式对应的List" + suffixExpreesionList); // ArrayList [1,2,3,+,4,*,+,5,–]
 
         System.out.printf("expression=%f\n", PolandNotation.calculate(suffixExpreesionList)); // ?

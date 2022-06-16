@@ -6,7 +6,7 @@ package InterpreterPattern;
  * Version 1.0
  **/
 
-public class MultiplyOperation extends NonTerminalExpression {
+    public class MultiplyOperation extends NonTerminalExpression {
 
 
     public MultiplyOperation(Expression e1, Expression e2) {
