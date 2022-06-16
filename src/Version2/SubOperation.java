@@ -16,7 +16,7 @@ public class SubOperation extends NonTerminalExpression {
      * 将两个表达式相减
      */
     @Override
-    public int interpreter(Context context) {
+    public double interpreter(Context context) {
         return this.e1.interpreter(context) - this.e2.interpreter(context);
     }
 }

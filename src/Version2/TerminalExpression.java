@@ -7,18 +7,14 @@ package Version2;
  **/
 
 public class TerminalExpression implements Expression{
-    String variable;
-    public TerminalExpression(String variable){
+
+    double variable;
+    public TerminalExpression(double variable){
         this.variable = variable;
     }
     @Override
-    public int interpreter(Context context) {
-        //因为要兼容之前的版本
-        Integer lookup = context.lookup(this);
-        if (lookup == null)
-            //若在map中能找到对应的数则返回
-            return Integer.parseInt(variable);
+    public double interpreter(Context context) {
+        return variable;
         //找不到则直接返回（认为输入的就是数字）
-        return lookup;
     }
 }

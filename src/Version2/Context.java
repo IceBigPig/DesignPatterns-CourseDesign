@@ -67,7 +67,7 @@ public class Context {
             } else {
                 //遇到非终结符直接入栈
 //                objects.push(new TerminalExpression(s));
-                objects.push(new TerminalExpression(s));
+                objects.push(new TerminalExpression(Double.parseDouble(s)));
             }
         }
         //把最后的栈顶元素返回

@@ -14,7 +14,7 @@ public class Test {
 //        TerminalExpression a = enw TerminalExpression("a");
 //        TerminalExpression b = new TerminalExpression("b");
 //        TerminalExpression c = new TerminalExpression("c");
-        String str = "9+3*3+1";
+//        String str = "9+3*3+1";
 
 
         String expression = "1-6+((2+3)*64)-5";// 注意表达式

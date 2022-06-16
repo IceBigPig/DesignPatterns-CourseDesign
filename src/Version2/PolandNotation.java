@@ -9,21 +9,20 @@ import java.util.Stack;
  * Author: icebigpig
  * Data: 2022/6/14 15:27
  * Version 1.0
+ *
+ * 完成将一个中缀表达式转成后缀表达式的功能
+ * 说明：
+ *  1. 1+((2+3)×4)-5 => 转成 1 2 3 + 4 × + 5 –
+ *  2. 因为直接对str 进行操作，不方便，因此 先将 "1+((2+3)×4)-5" =》 中缀的表达式对应的List
+ *  即 "1+((2+3)×4)-5" => ArrayList [1,+,(,(,2,+,3,),*,4,),-,5]
+ *  3. 将得到的中缀表达式对应的List => 后缀表达式对应的List
+ *  即 ArrayList [1,+,(,(,2,+,3,),*,4,),-,5] =》 ArrayList [1,2,3,+,4,*,+,5,–]
  **/
 public class PolandNotation {
 
-
-        // 完成将一个中缀表达式转成后缀表达式的功能
-        // 说明
-        // 1. 1+((2+3)×4)-5 => 转成 1 2 3 + 4 × + 5 –
-        // 2. 因为直接对str 进行操作，不方便，因此 先将 "1+((2+3)×4)-5" =》 中缀的表达式对应的List
-        // 即 "1+((2+3)×4)-5" => ArrayList [1,+,(,(,2,+,3,),*,4,),-,5]
-        // 3. 将得到的中缀表达式对应的List => 后缀表达式对应的List
-        // 即 ArrayList [1,+,(,(,2,+,3,),*,4,),-,5] =》 ArrayList [1,2,3,+,4,*,+,5,–]
-
-
-    // 即 ArrayList [1,+,(,(,2,+,3,),*,4,),-,5] =》 ArrayList [1,2,3,+,4,*,+,5,–]
-    // 方法：将得到的中缀表达式对应的List => 后缀表达式对应的List
+    /**
+     * 方法：将得到的中缀表达式对应的List => 后缀表达式对应的List
+     */
     public static List<String> parseSuffixExpreesionList(List<String> ls) {
         // 定义两个栈
         Stack<String> s1 = new Stack<>(); // 符号栈
@@ -70,8 +69,10 @@ public class PolandNotation {
         return s2; // 注意因为是存放到List, 因此按顺序输出就是对应的后缀表达式对应的List
     }
 
-    // 方法：将 中缀表达式转成对应的List
-    // s="1+((2+3)×4)-5";
+    /**
+     * 将中缀表达式转成对应的List
+     * s="1+((2+3)×4)-5";
+     */
     public static List<String> toInfixExpressionList(String s) {
         // 定义一个List,存放中缀表达式 对应的内容
         List<String> ls = new ArrayList<>();
@@ -95,19 +96,24 @@ public class PolandNotation {
         return ls;// 返回
     }
 
-    // 将一个逆波兰表达式， 依次将数据和运算符 放入到 ArrayList中
+    /**
+     * 将一个逆波兰表达式， 依次将数据和运算符 放入到 ArrayList中
+     */
     public static List<String> getListString(String suffixExpression) {
         // 将 suffixExpression 分割
         String[] split = suffixExpression.split(" ");
         return new ArrayList<>(Arrays.asList(split));
     }
 
-    // 完成对逆波兰表达式的运算
-    /*
-     * 1)从左至右扫描，将3和4压入堆栈； 2)遇到+运算符，因此弹出4和3（4为栈顶元素，3为次顶元素），计算出3+4的值，得7，再将7入栈； 3)将5入栈；
-     * 4)接下来是×运算符，因此弹出5和7，计算出7×5=35，将35入栈； 5)将6入栈； 6)最后是-运算符，计算出35-6的值，即29，由此得出最终结果
+    /**
+     * 完成对逆波兰表达式的运算
+     * 1)从左至右扫描，将3和4压入堆栈；
+     * 2)遇到+运算符，因此弹出4和3（4为栈顶元素，3为次顶元素），计算出3+4的值，得7，再将7入栈；
+     * 3)将5入栈；
+     * 4)接下来是×运算符，因此弹出5和7，计算出7×5=35，将35入栈；
+     * 5)将6入栈；
+     * 6)最后是-运算符，计算出35-6的值，即29，由此得出最终结果
      */
-
     public static int calculate(List<String> ls) {
         // 创建栈, 只需要一个栈即可
         Stack<String> stack = new Stack<>();

@@ -15,7 +15,7 @@ public class AddOperation extends NonTerminalExpression {
      * 将两个表达式相加
      */
     @Override
-    public int interpreter(Context context) {
+    public double interpreter(Context context) {
         return this.e1.interpreter(context) + this.e2.interpreter(context);
     }
 }

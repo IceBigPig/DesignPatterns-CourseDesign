@@ -11,5 +11,5 @@ public interface Expression {
     /**
      * 抽象解释方法
      */
-    int interpreter(Context context);
+    double interpreter(Context context);
 }
