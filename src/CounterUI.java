@@ -1,4 +1,3 @@
-package Counter;
 
 import Algorithm.PolandNotation;
 import Version2.Context;
@@ -10,7 +9,6 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,11 +16,11 @@ import javax.swing.JPanel;
 
 /**
  * Author: icebigpig
- * Data: 2022/6/13 8:44
+ * Data: 2022/6/16 12:50
  * Version 1.0
  **/
 
-public class CounterTest1 {
+public class CounterUI {
 
     String name;
 
@@ -34,11 +32,11 @@ public class CounterTest1 {
     //设置文本框的大小为30
     TextField textField = new TextField(30);
 
-    public CounterTest1() {
+    public CounterUI() {
 
     }
 
-    public CounterTest1 (String name){
+    public CounterUI (String name){
         this.name = name;
     }
 
@@ -122,16 +120,12 @@ public class CounterTest1 {
     //对于button 的操作
     public JButton ActionButtonInput(String buttonName) {
         JButton button = new JButton(buttonName);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringResult =stringResult + buttonName;
-                //将输入的计算数字在文本框中显示
-                textField.setText(stringResult);
-                //将输入的计算数字在控制台显示
-                System.out.println(stringResult);
-            }
-
+        button.addActionListener(e -> {
+            stringResult =stringResult + buttonName;
+            //将输入的计算数字在文本框中显示
+            textField.setText(stringResult);
+            //将输入的计算数字在控制台显示
+            System.out.println(stringResult);
         });
         return button;
     }
@@ -154,13 +148,7 @@ public class CounterTest1 {
     /**
      * 计算输入的字符串
      */
-    public	double calculate() {
-
-        //得到输入字符串的数字和操作符
-        //转义字符相当于+，-，*，/
-        String regex0 = "(\\+)|(\\-)|(\\*)|(\\/)";
-        //该语句定义一个正则表达式
-        String regex1 = "[0-9]+|[0-9]+\\.[0-9]";
+    public double calculate() {
 
         Context context = new Context();
 
@@ -174,77 +162,27 @@ public class CounterTest1 {
 
         System.out.println(suffixExpreesionList + "=" + build.interpreter(context));
 
-        //将输入的字符串按运算符（+，-, * , / ）分割出来  ，剩下数字
-        String[] split1 = stringResult.split(regex0);
-//		for (int i = 0; i < array.length; i++) {
-//			System.out.print(split1[i]+"  ");
-//		}
-        //将运算符分割出来
-        String[] split2 = stringResult.split(regex1);
-//		for(int i=0;i<split2.length;i++) {
-//			System.out.println(split2[i]);   // + - * /
-//		}
+        this.result = build.interpreter(context);
 
-        String[] str = new String[split2.length];
-
-        //格式化split2数组,
-        int j = 0;
-        for (String s : split2) {
-
-            if (s.equals(".")) {
-            }
-            else str[j++] = s;
-        }
-
-        //计算结果
-        double tresult = 0;
-        for (int i = 0; i < split1.length; ++i) {
-            if (i == 0) {
-                //表示将从数组中得到的值转换成Double类型的数据
-                tresult = Double.parseDouble(split1[i]);
-            }else {
-                //判断进行什么操作
-                switch (str[i]) {
-                    case "+":
-                        tresult += Double.parseDouble(split1[i]);
-                        break;
-                    case "-":
-                        tresult -= Double.parseDouble(split1[i]);
-                        break;
-                    case "*":
-                        tresult *= Double.parseDouble(split1[i]);
-                        break;
-                    case "/":
-                        tresult /= Double.parseDouble(split1[i]);
-                        break;
-                }
-            }
-        }
-
-        this.result = tresult;
-        return result;
+        return build.interpreter(context);
 
     }
 
     //设置清除按钮监听器
     public JButton DelButton(String buttonName) {
         JButton button = new JButton(buttonName);
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //将结果和文本框内容清除
-                result = 0;
-                stringResult = "";
-                textField.setText(stringResult);
-            }
+        button.addActionListener(arg0 -> {
+            //将结果和文本框内容清除
+            result = 0;
+            stringResult = "";
+            textField.setText(stringResult);
         });
         return button;
     }
 
     public static void main(String[] args) {
 
-        CounterTest1 test = new CounterTest1();
+        CounterUI test = new CounterUI();
         test.createFrame();
 
     }
