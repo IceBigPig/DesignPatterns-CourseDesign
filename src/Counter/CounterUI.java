@@ -1,8 +1,11 @@
 package Counter;
 
+import Adapter.CounterOperation;
+import Adapter.OperationAdapter;
 import Algorithm.PolandNotation;
 import Version2.Context;
 import Version2.Expression;
+import jdk.nashorn.internal.codegen.ObjectClassGenerator;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -19,17 +22,17 @@ import javax.swing.JPanel;
  * Version 1.0
  **/
 
-public class CounterUI {
+public class CounterUI implements Cloneable{
 
     /**
      * 计算结果
      */
-    private static double result = 0;
+    private double result = 0;
 
     /**
      * 文本框中输入的内容
      */
-    private static String stringResult = "";
+    private String stringResult = "";
 
     /**
      * 设置文本框的大小为30
@@ -45,8 +48,7 @@ public class CounterUI {
         jFrame.setLayout(new FlowLayout(FlowLayout.CENTER));
         jFrame.setSize(350,500);   //大小
         jFrame.setLocation(700,300);		//位置
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		//关闭按钮
-
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//关闭按钮
 
         //设置按钮7,8,9，+
         JPanel jPanel1 = new JPanel(new GridLayout(1,4,5,5));
@@ -147,21 +149,11 @@ public class CounterUI {
     /**
      * 计算输入的字符串
      */
-    public static void calculate() {
-
-        Context context = new Context();
-
-        // 对输入的表达式进行重新编码
-        List<String> infixExpressionList = PolandNotation.toInfixExpressionList(stringResult);
-        List<String> suffixExpressionList = PolandNotation.parseSuffixExpreesionList(infixExpressionList);
-        // 构建语法树
-        Expression build = Context.build(suffixExpressionList);
-//        System.out.printf("expression=%f\n", PolandNotation.calculate(suffixExpressionList));
-
-        // 输出到控制台查看运算结果
-        System.out.println(suffixExpressionList + "=" + build.interpreter(context));
+    public void calculate() {
+        // 调用适配器
+        CounterOperation counterOperation = new OperationAdapter();
         // 更正UI界面中的结果
-        result = build.interpreter(context);
+        result = counterOperation.getResult(stringResult);
     }
 
     /**
@@ -179,11 +171,28 @@ public class CounterUI {
     }
 
     /**
+     * 快速创建新窗体
+     */
+    public Object clone() {
+        Object obj;
+        try {
+            obj = super.clone();
+            System.out.println("克隆新窗体！");
+            return obj;
+        } catch (CloneNotSupportedException e) {
+            System.out.println("克隆失败！");
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * 程序主入口
      */
     public static void main(String[] args) {
 
-        CounterUI test = new CounterUI();
-        test.createFrame();
+        CounterUI counterUI = new CounterUI();
+        counterUI.createFrame();
+
+        CounterUI counter = (CounterUI) counterUI.clone();
     }
 }
