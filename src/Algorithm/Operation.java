@@ -1,4 +1,4 @@
-package Version2;
+package Algorithm;
 
 /**
  * Author: icebigpig

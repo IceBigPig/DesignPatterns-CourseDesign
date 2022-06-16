@@ -1,9 +1,6 @@
-package Version2;
+package Algorithm;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Author: icebigpig
@@ -31,10 +28,12 @@ public class PolandNotation {
         // Stack<String> s2 = new Stack<String>(); // 储存中间结果的栈s2
         List<String> s2 = new ArrayList<>(); // 储存中间结果的Lists2
 
+        System.out.println(ls);
+
         // 遍历ls
         for (String item : ls) {
             // 如果是一个数，加入s2
-            if (item.matches("\\d+")) {
+            if (item.matches("^(\\-|\\+)?\\d+(\\.\\d+)?$")) {
                 s2.add(item);
             } // 如果s1为空,则直接将此运算符入栈；
             else if (s1.size() == 0) {
@@ -81,19 +80,19 @@ public class PolandNotation {
         char c; // 每遍历到一个字符，就放入到c
         do {
             // 如果c是一个非数字，我需要加入到ls
-            if ((c = s.charAt(i)) < 48 || (c = s.charAt(i)) > 57) {
+            if (((s.charAt(i)) < 48 || (s.charAt(i)) > 57) & (c=s.charAt(i)) != '.') {
                 ls.add("" + c);
                 i++; // i需要后移
-            } else { // 如果是一个数，需要考虑多位数
+            } else { // 需要考虑多位数，如果是一个数或者小数点，则进行追加
                 str = new StringBuilder(); // 先将str 置成"" '0'[48]->'9'[57]
-                while (i < s.length() && s.charAt(i) >= 48 && (c = s.charAt(i)) <= 57) {
-                    str.append(c);// 拼接
+                while (i < s.length() && ((s.charAt(i) >= 48 && (s.charAt(i)) <= 57) || s.charAt(i) == '.')) {
+                    str.append(s.charAt(i));// 拼接
                     i++;
                 }
                 ls.add(str.toString());
             }
         } while (i < s.length());
-        return ls;// 返回
+        return ls;
     }
 
     /**
@@ -114,20 +113,20 @@ public class PolandNotation {
      * 5)将6入栈；
      * 6)最后是-运算符，计算出35-6的值，即29，由此得出最终结果
      */
-    public static int calculate(List<String> ls) {
+    public static double calculate(List<String> ls) {
         // 创建栈, 只需要一个栈即可
         Stack<String> stack = new Stack<>();
         // 遍历 ls
         for (String item : ls) {
             // 这里使用正则表达式来取出数
-            if (item.matches("\\d+")) { // 匹配的是多位数
+            if (item.matches("^(\\-|\\+)?\\d+(\\.\\d+)?$")) { // 匹配的是多位数
                 // 入栈
                 stack.push(item);
             } else {
                 // pop出两个数，并运算， 再入栈
-                int num2 = Integer.parseInt(stack.pop());
-                int num1 = Integer.parseInt(stack.pop());
-                int res;
+                double num2 = Double.parseDouble(stack.pop());
+                double num1 = Double.parseDouble(stack.pop());
+                double res;
                 switch (item) {
                     case "+":
                         res = num1 + num2;
@@ -149,6 +148,6 @@ public class PolandNotation {
             }
         }
         // 最后留在stack中的数据是运算结果
-        return Integer.parseInt(stack.pop());
+        return Double.parseDouble(stack.pop());
     }
 }
