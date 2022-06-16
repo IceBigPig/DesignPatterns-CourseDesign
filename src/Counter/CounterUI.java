@@ -2,15 +2,9 @@ package Counter;
 
 import Adapter.CounterOperation;
 import Adapter.OperationAdapter;
-import Algorithm.PolandNotation;
-import Version2.Context;
-import Version2.Expression;
-import jdk.nashorn.internal.codegen.ObjectClassGenerator;
-
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
-import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -183,16 +177,5 @@ public class CounterUI implements Cloneable{
             System.out.println("克隆失败！");
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * 程序主入口
-     */
-    public static void main(String[] args) {
-
-        CounterUI counterUI = new CounterUI();
-        counterUI.createFrame();
-
-        CounterUI counter = (CounterUI) counterUI.clone();
     }
 }

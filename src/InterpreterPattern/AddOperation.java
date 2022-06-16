@@ -1,4 +1,4 @@
-package Version2;
+package InterpreterPattern;
 
 /**
  * Author: icebigpig

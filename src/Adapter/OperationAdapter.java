@@ -1,8 +1,8 @@
 package Adapter;
 
 import Algorithm.PolandNotation;
-import Version2.Context;
-import Version2.Expression;
+import InterpreterPattern.Context;
+import InterpreterPattern.Expression;
 
 import java.util.List;
 
