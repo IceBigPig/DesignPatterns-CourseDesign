@@ -1,8 +1,6 @@
 package Version2;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Author: icebigpig
@@ -34,36 +32,42 @@ public class Context {
     /**
      * 构建语法树的主要方法
      */
-    public static Expression build(String str) {
+    public static Expression build(List<String> strings) {
         //主要利用栈来实现
         Stack<Expression> objects = new Stack<>();
 
         // 对每个字符串进行遍历判断
-        for (int i = 0; i < str.length(); i++){
-            char c = str.charAt(i);
+        for (String s : strings) {
             // 遇到运算符号*号时候
-            if (c == '*') {
+            if (Objects.equals(s, "*")) {
                 // 取出栈顶的两个元素
-                Expression pop = objects.pop();
-                objects.push(new MultiplyOperation(pop, new TerminalExpression(String.valueOf(str.charAt(++i)))));
-            } else if (c == '/') {
+                Expression pop_1 = objects.pop();
+                Expression pop_2 = objects.pop();
+                // 生成带有运算符号的节点
+                objects.push(new MultiplyOperation(pop_1, pop_2));
+            } else if (Objects.equals(s, "/")) {
                 // 取出栈顶的两个元素
-                Expression pop = objects.pop();
-                objects.push(new MultiplyOperation(pop, new TerminalExpression(String.valueOf(str.charAt(++i)))));
-            } else if (c == '+'){
+                Expression pop_1 = objects.pop();
+                Expression pop_2 = objects.pop();
+                // 生成带有运算符号的节点
+                objects.push(new MultiplyOperation(pop_1, pop_2));
+            } else if (Objects.equals(s, "+")) {
                 //遇到运算符号+号时候
-                //先出栈
-                Expression pop = objects.pop();
+                // 取出栈顶的两个元素
+                Expression pop_1 = objects.pop();
+                Expression pop_2 = objects.pop();
                 //将运算结果入栈
-                objects.push(new AddOperation(pop, new TerminalExpression(String.valueOf(str.charAt(++i)))));
-            } else if (c == '-'){
+                objects.push(new AddOperation(pop_1, pop_2));
+            } else if (Objects.equals(s, "-")) {
                 //遇到减号类似加号
-                Expression pop = objects.pop();
-                objects.push(new SubOperation(pop, new TerminalExpression(String.valueOf(str.charAt(++i)))));
-                // TODO 这里只处理了单个字符，当出现多位数值会出现问题
+                // 取出栈顶的两个元素
+                Expression pop_1 = objects.pop();
+                Expression pop_2 = objects.pop();
+                objects.push(new SubOperation(pop_2, pop_1));
             } else {
-                //遇到非终结符直接入栈（基本就是第一个数字的情况）
-                objects.push(new TerminalExpression(String.valueOf(str.charAt(i))));
+                //遇到非终结符直接入栈
+//                objects.push(new TerminalExpression(s));
+                objects.push(new TerminalExpression(s));
             }
         }
         //把最后的栈顶元素返回
