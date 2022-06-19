@@ -1,4 +1,4 @@
-package Counter;
+package PrototypePattern;
 
 import Adapter.CounterOperation;
 import Adapter.OperationAdapter;
@@ -176,6 +176,7 @@ public class CounterUI implements Cloneable{
         Object obj;
         try {
             obj = super.clone();
+            obj = new CounterUI();
             System.out.println("克隆新窗体！");
             return obj;
         } catch (CloneNotSupportedException e) {

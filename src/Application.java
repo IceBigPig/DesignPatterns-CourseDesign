@@ -1,4 +1,4 @@
-import Counter.CounterUI;
+import PrototypePattern.FrameInit;
 
 /**
  * Author: icebigpig
@@ -12,11 +12,6 @@ public class Application {
      * 程序主入口
      */
     public static void main(String[] args) {
-        CounterUI counterUI = new CounterUI();
-        counterUI.createFrame();
-
-        CounterUI counterUI1 = new CounterUI();
-        counterUI1.createFrame();
-
+        new FrameInit();
     }
 }
