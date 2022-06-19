@@ -25,12 +25,12 @@ public class FrameInit {
         f = new Frame("myFrame");
         f.setBounds(1000, 500, 300, 400);
         f.setLayout(new FlowLayout());
-        Button but = new Button("创建新窗体");
+        Button but = new Button("Clone");
         myEvent();
         f.add(but);
         f.setVisible(true);
         but.addActionListener(e -> {
-            System.out.println("Clone");
+            System.out.println("创建新窗体");
             CounterUI newCounter = (CounterUI)counterUI.clone();
             newCounter.createFrame();
         });
