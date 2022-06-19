@@ -1,7 +1,6 @@
 package InterpreterPattern;
 
 import Algorithm.PolandNotation;
-
 import java.util.List;
 
 /**

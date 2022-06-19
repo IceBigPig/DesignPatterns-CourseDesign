@@ -14,5 +14,9 @@ public class Application {
     public static void main(String[] args) {
         CounterUI counterUI = new CounterUI();
         counterUI.createFrame();
+
+        CounterUI counterUI1 = new CounterUI();
+        counterUI1.createFrame();
+
     }
 }

@@ -89,6 +89,11 @@ public class CounterUI implements Cloneable{
         // 设置等于按钮
         String buttonEqu = "=";
         jPanel4.add(ActionButtonEqu(buttonEqu));
+        //设置括号按钮
+        String buttonLeft = "(";
+        jPanel4.add(ActionButtonInput(buttonLeft));
+        String buttonRight = ")";
+        jPanel4.add(ActionButtonInput(buttonRight));
 
         //设置删除按钮为一行一列，5个像素点
         JPanel jPanel5 = new JPanel(new GridLayout(1,1,5,5));
